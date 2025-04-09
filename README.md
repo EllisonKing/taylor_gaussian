@@ -38,6 +38,12 @@
 
 Instead of relying on **time-conditioned polynomial functions** to approximate Gaussian trajectories and directions, this solution investigates a more **accurate Gaussian evolution** model for dynamic scenarios.
 
+# TODO Lists
+- [x] *Repo* - Create repo for [TaylorGaussian](https://ellisonking.github.io/TaylorGaussian).
+- [ ] *Clean* - Clean the system
+- [ ] *Test* -Test the system on Ubuntu Server
+- [ ] *Code* - Release for our method
+
 
 # 1.Installation
 
