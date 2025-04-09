@@ -9,7 +9,7 @@
   <p align="center">
     <p align="center">
     <strong>Bingbing Hu </strong> ·
-    <strong>Yanyan Li2</strong> ·
+    <strong>Yanyan Li</strong> ·
     <strong>Rui Xie </strong> ·
     <strong>Bo Xu</strong> ·
     <strong>Haoye Dong</strong> ·
@@ -27,6 +27,16 @@
 
 
 
+<p align="center">
+  <a href="">
+    <img src="./imgs/Framework.jpg" alt="teaser" width="100%">
+  </a>
+</p>
+
+
+# Motivation
+
+Instead of relying on **time-conditioned polynomial functions** to approximate Gaussian trajectories and directions, this solution investigates a more **accurate Gaussian evolution** model for dynamic scenarios.
 
 
 # 1.Installation
