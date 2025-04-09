@@ -41,8 +41,8 @@ Instead of relying on **time-conditioned polynomial functions** to approximate G
 # TODO Lists
 - [x] *Repo* - Create repo for [TaylorGaussian](https://ellisonking.github.io/TaylorGaussian).
 - [ ] *Clean* - Clean the system
-- [ ] *Test* -Test the system on Ubuntu Server
-- [ ] *Code* - Release for our method
+- [ ] *Test* - Test the system on different Ubuntu servers
+- [ ] *Code* - Release code to the community
 
 
 # 1.Installation
