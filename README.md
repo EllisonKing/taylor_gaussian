@@ -1,1 +1,59 @@
-# dynamicgaussian
+[comment]: <> (# Learnable Infinite Taylor Gaussian for Dynamic View Rendering)
+
+<!-- PROJECT LOGO -->
+
+<p align="center">
+
+  <h1 align="center"> Learnable Infinite Taylor Gaussian for Dynamic View Rendering
+  </h1>
+  <p align="center">
+    <p align="center">
+    <strong>Bingbing Hu </strong> ·
+    <strong>Yanyan Li2</strong> ·
+    <strong>Rui Xie </strong> ·
+    <strong>Bo Xu</strong> ·
+    <strong>Haoye Dong</strong> ·
+    <strong>Junfeng Yao</strong>  ·
+    <strong>Gim Hee Lee </strong>
+    </p>
+  </p>
+
+
+
+
+[comment]: <> (  <h2 align="center">PAPER</h2>)
+  <h3 align="center"><a href="https://arxiv.org/pdf/2412.04282">Paper</a> | <a href="https://ellisonking.github.io/TaylorGaussian/">Project Page</a></h3>
+  <div align="center"></div>
+
+
+
+
+
+# 1.Installation
+
+# 2.Pretrained Models
+
+# 3.Datasets
+
+# 4.Acknowledgement
+This work incorporates many open-source codes. We extend our gratitude to the authors of the software.
+
+
+# 5.License
+
+
+# 6.Citation
+If you find this code/work useful for your own research, please consider citing:
+
+
+
+
+
+
+
+
+
+
+
+
+
