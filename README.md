@@ -320,9 +320,9 @@ Birthday
 
 ### 2. Erratum
 
-<div style="text-align: justify;">
+
 In Table 1 (evaluated on the N3DV Dataset) of the first arXiv version, the experimental results of our method were affected due to a polluted training dataset. Specifically, we later discovered that a critical parameter was incorrectly set, eval was mistakenly set to False, which led to inaccurate values for the PSNR, SSIM, and LPIPS metrics in testing. If you are using the same code for testing, please ensure that the correct setting is used. For detailed experimental logs, please refer [here](experimental_logs/arxiv_logs.txt).
-</div>
+
 
 
 ## ⭕️ Acknowledgement
