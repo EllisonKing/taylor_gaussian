@@ -1,0 +1,235 @@
+. ./test.sh 6
+Dataset: Neural3D_DA/cut_roasted_beef
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/cut_roasted_beef_node/cfg_args
+Config file found: logs/second-test/cut_roasted_beef_node/cfg_args
+Rendering logs/second-test/cut_roasted_beef_node
+Building Learnable Gaussians for Nodes! [25/04 15:28:23]
+Loading trained model at iteration 67000 [25/04 15:28:23]
+Reading camera 20/20 [25/04 15:28:23]
+eval: True [25/04 15:28:23]
+eval: True [25/04 15:28:23]
+train_cam_infos: 950 [25/04 15:28:23]
+test_cam_infos: 50 [25/04 15:28:23]
+Loading Training Cameras [25/04 15:28:23]
+Loading Test Cameras [25/04 15:32:01]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [02:56<00:00,  3.54s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 67000] Evaluating test: PSNR 36.959110260009766 SSIM 0.9836052656173706 LPIPS 0.13177058100700378 MS SSIM0.9856878519058228 ALEX_LPIPS 0.03531259298324585 [25/04 15:35:15]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,
+Dataset: Neural3D_DA/flame_salmon_1
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/flame_salmon_1_node/cfg_args
+Config file found: logs/second-test/flame_salmon_1_node/cfg_args
+Rendering logs/second-test/flame_salmon_1_node
+Building Learnable Gaussians for Nodes! [25/04 15:35:26]
+Loading trained model at iteration 58000 [25/04 15:35:26]
+Reading camera 19/19 [25/04 15:35:27]
+eval: True [25/04 15:35:27]
+eval: True [25/04 15:35:27]
+train_cam_infos: 900 [25/04 15:35:27]
+test_cam_infos: 50 [25/04 15:35:27]
+Loading Training Cameras [25/04 15:35:27]
+Loading Test Cameras [25/04 15:39:03]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [03:03<00:00,  3.68s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 58000] Evaluating test: PSNR 31.854501724243164 SSIM 0.9719871282577515 LPIPS 0.1571752279996872 MS SSIM0.9729604721069336 ALEX_LPIPS 0.07459383457899094 [25/04 15:42:27]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,
+Dataset: Neural3D_DA/flame_steak
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/flame_steak_node/cfg_args
+Config file found: logs/second-test/flame_steak_node/cfg_args
+Rendering logs/second-test/flame_steak_node
+Building Learnable Gaussians for Nodes! [25/04 15:42:38]
+Loading trained model at iteration 55000 [25/04 15:42:38]
+Reading camera 21/21 [25/04 15:42:38]
+eval: True [25/04 15:42:38]
+eval: True [25/04 15:42:38]
+train_cam_infos: 1000 [25/04 15:42:38]
+test_cam_infos: 50 [25/04 15:42:38]
+Loading Training Cameras [25/04 15:42:38]
+Loading Test Cameras [25/04 15:46:59]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [03:04<00:00,  3.68s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 55000] Evaluating test: PSNR 37.64403533935547 SSIM 0.9844577312469482 LPIPS 0.12497442215681076 MS SSIM0.9862213134765625 ALEX_LPIPS 0.029333533719182014 [25/04 15:50:25]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,
+Dataset: Neural3D_DA/sear_steak
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/sear_steak_node/cfg_args
+Config file found: logs/second-test/sear_steak_node/cfg_args
+Rendering logs/second-test/sear_steak_node
+Building Learnable Gaussians for Nodes! [25/04 15:50:37]
+Loading trained model at iteration 55000 [25/04 15:50:37]
+Reading camera 21/21 [25/04 15:50:37]
+eval: True [25/04 15:50:37]
+eval: True [25/04 15:50:37]
+train_cam_infos: 1000 [25/04 15:50:37]
+test_cam_infos: 50 [25/04 15:50:37]
+Loading Training Cameras [25/04 15:50:37]
+Loading Test Cameras [25/04 15:54:38]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [03:00<00:00,  3.61s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 55000] Evaluating test: PSNR 38.431365966796875 SSIM 0.9848723411560059 LPIPS 0.1262357085943222 MS SSIM0.9866853952407837 ALEX_LPIPS 0.02988363616168499 [25/04 15:57:56]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,
+Dataset: Neural3D_DA/coffee_martini
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/coffee_martini_node/cfg_args
+Config file found: logs/second-test/coffee_martini_node/cfg_args
+Rendering logs/second-test/coffee_martini_node
+Building Learnable Gaussians for Nodes! [25/04 15:58:08]
+Loading trained model at iteration 59000 [25/04 15:58:08]
+Reading camera 18/18 [25/04 15:58:10]
+eval: True [25/04 15:58:10]
+eval: True [25/04 15:58:10]
+train_cam_infos: 850 [25/04 15:58:10]
+test_cam_infos: 50 [25/04 15:58:10]
+Loading Training Cameras [25/04 15:58:10]
+Loading Test Cameras [25/04 16:03:31]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [03:04<00:00,  3.69s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 59000] Evaluating test: PSNR 32.523319244384766 SSIM 0.9737179279327393 LPIPS 0.155904620885849 MS SSIM0.9746122360229492 ALEX_LPIPS 0.07362499833106995 [25/04 16:07:00]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,
+Dataset: Neural3D_DA/cook_spinach
+New soft limit: 4096, New hard limit: 1048576
+Use original torch svd!
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Looking for config file in logs/second-test/cook_spinach_node/cfg_args
+Config file found: logs/second-test/cook_spinach_node/cfg_args
+Rendering logs/second-test/cook_spinach_node
+Building Learnable Gaussians for Nodes! [25/04 16:07:10]
+Loading trained model at iteration 43000 [25/04 16:07:10]
+Reading camera 21/21 [25/04 16:07:11]
+eval: True [25/04 16:07:11]
+eval: True [25/04 16:07:11]
+train_cam_infos: 1000 [25/04 16:07:11]
+test_cam_infos: 50 [25/04 16:07:11]
+Loading Training Cameras [25/04 16:07:11]
+Loading Test Cameras [25/04 16:11:33]
+Rendering progress:   0%|                                                                                                                                                                                     | 0/50 [00:00<?, ?it/s]/data/hbb/anaconda3/envs/taylorgaussian/lib/python3.10/site-packages/torchvision/models/_utils.py:135: UserWarning: Using 'weights' as positional parameter(s) is deprecated since 0.13 and may be removed in the future. Please use keyword parameter(s) instead.
+  warnings.warn(
+Rendering progress: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [02:59<00:00,  3.59s/it]
+WARNING:imageio_ffmpeg:IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1352, 1014) to (1360, 1024) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+
+[ITER 43000] Evaluating test: PSNR 30.172260284423828 SSIM 0.9447305202484131 LPIPS 0.18275141716003418 MS SSIM0.9604721069335938 ALEX_LPIPS 0.07273372262716293 [25/04 16:14:50]
+/data/hbb/nlp/taylorgaussian/render5-test.py:122: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:123: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "PSNR": torch.tensor(psnr_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:124: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:125: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+/data/hbb/nlp/taylorgaussian/render5-test.py:126: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  "LPIPSVGG": torch.tensor(lpips_test).item()#,

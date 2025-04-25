@@ -27,9 +27,9 @@
 Instead of relying on **time-conditioned polynomial functions** to approximate Gaussian trajectories and directions, this solution investigates a more **accurate Gaussian evolution** model for dynamic scenarios.
 
 
-<p style="text-align: justify;">
+<div style="text-align: justify;">
 Capturing the temporal evolution of Gaussian properties such as position, rotation, and scale is a challenging task due to the vast number of time-varying parameters and the limited photometric data available, which generally results in convergence issues, making it difficult to find an optimal solution. While feeding all inputs into an end-to-end neural network can effectively model complex temporal dynamics, this approach lacks explicit supervision and struggles to generate high-quality transformation fields. On the other hand, using time-conditioned polynomial functions to model Gaussian trajectories and orientations provides a more explicit and interpretable solution, but requires significant handcrafted effort and lacks generalizability across diverse scenes. To overcome these limitations, this paper introduces a novel approach based on a learnable infinite Taylor Formula to model the temporal evolution of Gaussians. This method offers both the flexibility of an implicit network-based approach and the interpretability of explicit polynomial functions, allowing for more robust and generalizable modeling of Gaussian dynamics across various dynamic scenes.
-</p>
+</div>
 
 ## 📋 TODO List
 - [x] *Repo* - Create repo for [TaylorGaussian](https://ellisonking.github.io/TaylorGaussian).
@@ -38,7 +38,7 @@ Capturing the temporal evolution of Gaussian properties such as position, rotati
 - [x] *Code* - Release code to the community
 
 
-# 🔧 Installation
+## 🔧 Installation
 
 ### 1. Clone the TaylorGaussian Repo
 ```
@@ -70,7 +70,7 @@ cd ./simple-knn/
 pip install -e .
 ```
 
-# 💾 Datasets
+## 💾 Datasets
 
 ### 1. N3DV
 Download the dataset from [here](https://github.com/facebookresearch/Neural_3D_Video.git).
@@ -79,6 +79,7 @@ python script/n3d_process.py --videopath ./data/Neural3D/cook_spinach
 ```
 
 For each sequence, the structure is organized as follows:
+```
 cook_spinach
 ├── cam00
 ├── cam01
@@ -91,15 +92,15 @@ cook_spinach
 ├── colmap_4
 ├── colmap_<....>
 └── poses_bounds.npy
-
+```
 
 ### 2. Technicolor
 The dataset is provided by：[Dataset and Pipeline for Multi-View Light-Field Video](https://openaccess.thecvf.com/content_cvpr_2017_workshops/w27/papers/Sabater_Dataset_and_Pipeline_CVPR_2017_paper.pdf)，
 ```
 python script/technicolor_process.py --videopath ./data/Technicolor/Birthday
-
 ```
 For each sequence, the structure is organized as follows:
+```
 Birthday
 ├── Birthday_undist_00001_00.png
 ├── Birthday_undist_00001_01.png
@@ -109,9 +110,9 @@ Birthday
 ├── colmap_0
 ├── colmap_1
 ├── colmap_<....>
+```
 
-
-# 📊  Results
+## 📊  Results
 
 ### 1. SOTA Performance
 <table>
@@ -317,12 +318,12 @@ Birthday
 
 ### 2. Erratum
 
-<p style="text-align: justify;">
-In Table 1 (evaluated on the N3DV Dataset) of the first arXiv version, the experimental results of our method were affected due to a polluted training dataset. Specifically, we later discovered that a critical parameter was incorrectly set, eval was mistakenly set to False, which led to inaccurate values for the PSNR, SSIM, and LPIPS metrics in testing. If you are using the same code for testing, please ensure that the correct setting is used. For detailed experimental logs, please refer [here](https:).
-</p>
+<div style="text-align: justify;">
+In Table 1 (evaluated on the N3DV Dataset) of the first arXiv version, the experimental results of our method were affected due to a polluted training dataset. Specifically, we later discovered that a critical parameter was incorrectly set, eval was mistakenly set to False, which led to inaccurate values for the PSNR, SSIM, and LPIPS metrics in testing. If you are using the same code for testing, please ensure that the correct setting is used. For detailed experimental logs, please refer [here](experimental_logs/arxiv_logs.txt).
+</div>
 
 
-# ⭕️ Acknowledgement
+## ⭕️ Acknowledgement
 This work incorporates many open-source codes. We extend our gratitude to the authors of the software.
 - [SCGS](https://github.com/CVMI-Lab/SC-GS)
 - [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting)
@@ -330,9 +331,7 @@ This work incorporates many open-source codes. We extend our gratitude to the au
 - [SpacetimeGaussians](https://github.com/oppo-us-research/SpacetimeGaussians)
 
 
-# ✉️ Citation
-
-
+## ✉️ Citation
 
 If you find this code/work useful for your own research, please consider citing:
 
