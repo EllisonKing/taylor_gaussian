@@ -79,6 +79,7 @@ python script/n3d_process.py --videopath ./data/Neural3D/cook_spinach
 ```
 
 For each sequence, the structure is organized as follows:
+```
 cook_spinach
 ├── cam00
 ├── cam01
@@ -91,7 +92,7 @@ cook_spinach
 ├── colmap_4
 ├── colmap_<....>
 └── poses_bounds.npy
-
+```
 
 ### 2. Technicolor
 The dataset is provided by：[Dataset and Pipeline for Multi-View Light-Field Video](https://openaccess.thecvf.com/content_cvpr_2017_workshops/w27/papers/Sabater_Dataset_and_Pipeline_CVPR_2017_paper.pdf)，
@@ -100,6 +101,7 @@ python script/technicolor_process.py --videopath ./data/Technicolor/Birthday
 
 ```
 For each sequence, the structure is organized as follows:
+```
 Birthday
 ├── Birthday_undist_00001_00.png
 ├── Birthday_undist_00001_01.png
@@ -109,7 +111,7 @@ Birthday
 ├── colmap_0
 ├── colmap_1
 ├── colmap_<....>
-
+```
 
 # 📊  Results
 
