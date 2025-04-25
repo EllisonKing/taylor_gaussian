@@ -1,0 +1,4 @@
+# ninja log v5
+0	12982	1740924351317050518	/data/hbb/nlp/SC-GS/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/simple_knn.o	9805073580aaa04f
+0	21594	1740924359921146916	/data/hbb/nlp/SC-GS/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/ext.o	f43c02b0bed76cf4
+0	53399	1740924391737491202	/data/hbb/nlp/SC-GS/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/spatial.o	f12d5314fda66397
