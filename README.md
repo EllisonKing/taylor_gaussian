@@ -42,6 +42,8 @@ Capturing the temporal evolution of Gaussian properties such as position, rotati
 
 ### 1. Clone the TaylorGaussian Repo
 ```
+git clone https://github.com/EllisonKing/taylor_gaussian.git
+cd taylor_gaussian
 conda create -n taylorgaussian python=3.10
 conda activate taylorgaussian
 ```

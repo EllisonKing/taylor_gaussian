@@ -5,7 +5,7 @@ run_pipeline() {
 
     # train
     CUDA_VISIBLE_DEVICES="$GPU_ID" python main.py \
-    --source_path data_spacetime/"$data_name_path"/colmap_0 \
+    --source_path data/"$data_name_path"/colmap_0 \
     --model_path logs/technicolor/"$data_name" \
     --deform_type node \
     --node_num 1024 \
@@ -24,7 +24,7 @@ run_pipeline() {
 
     # render
     CUDA_VISIBLE_DEVICES="$GPU_ID" python render.py \
-    --source_path data_spacetime/"$data_name_path"/colmap_0 \
+    --source_path data/"$data_name_path"/colmap_0 \
     --model_path logs/technicolor/"$data_name" \
     --deform_type node \
     --node_num 1024 \

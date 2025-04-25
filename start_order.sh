@@ -6,7 +6,7 @@ run_pipeline() {
 
     # train
     CUDA_VISIBLE_DEVICES="$GPU_ID" python main.py \
-    --source_path data_spacetime/Neural3D/"$data_name"/colmap_0 \
+    --source_path data/Neural3D/"$data_name"/colmap_0 \
     --model_path logs/N3DV/"$data_name"_test \
     --deform_type node \
     --node_num 4096 \
@@ -26,7 +26,7 @@ run_pipeline() {
 
     # render
     CUDA_VISIBLE_DEVICES="$GPU_ID" python render.py \
-    --source_path data_spacetime/Neural3D/"$data_name"/colmap_0 \
+    --source_path data/Neural3D/"$data_name"/colmap_0 \
     --model_path logs/N3DV/"$data_name"_test \
     --deform_type node \
     --node_num 4096 \
