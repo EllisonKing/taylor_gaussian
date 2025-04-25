@@ -97,7 +97,7 @@ cook_spinach
 ```
 
 ### 2. Technicolor
-The dataset is provided by：[Dataset and Pipeline for Multi-View Light-Field Video](https://openaccess.thecvf.com/content_cvpr_2017_workshops/w27/papers/Sabater_Dataset_and_Pipeline_CVPR_2017_paper.pdf)，
+The dataset is provided by: [Dataset and Pipeline for Multi-View Light-Field Video](https://openaccess.thecvf.com/content_cvpr_2017_workshops/w27/papers/Sabater_Dataset_and_Pipeline_CVPR_2017_paper.pdf),
 ```
 python script/technicolor_process.py --videopath ./data/Technicolor/Birthday
 ```
@@ -320,8 +320,8 @@ Birthday
 
 ### 2. Erratum
 
+The experimental results on N3DV Dataset shown in Table 1 of our [first arXiv paper](https://arxiv.org/pdf/2412.04282v1) are erroneous due to our oversight in setting eval=false during training. This oversight resulted in the test images being unintentionally exposed during training. We have since fixed the bug and the correct results are shown in Table 1 of our [latest arXiv paper](https://arxiv.org/abs/2412.04282v2). If you are using the same code for testing, please ensure that the correct setting is used. For detailed experimental logs, please refer [here](experimental_logs/arxiv_logs.txt).
 
-In Table 1 (evaluated on the N3DV Dataset) of the first arXiv version, the experimental results of our method were affected due to a polluted training dataset. Specifically, we later discovered that a critical parameter was incorrectly set, eval was mistakenly set to False, which led to inaccurate values for the PSNR, SSIM, and LPIPS metrics in testing. If you are using the same code for testing, please ensure that the correct setting is used. For detailed experimental logs, please refer [here](experimental_logs/arxiv_logs.txt).
 
 
 
