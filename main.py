@@ -1943,14 +1943,13 @@ if __name__ == "__main__":
     import os.path as osp
     if not os.path.exists(args.model_path+'_node'):
         os.makedirs(args.model_path+'_node', exist_ok=True)
-    config.dump(osp.join(args.model_path+'_node', osp.basename(args.config.split('/')[-1])))
+    # config.dump(osp.join(args.model_path+'_node', osp.basename(args.config.split('/')[-1])))
 
     args = read_config_params(args, cfg)
 
     with open(os.path.join(args.model_path+'_node', "args.py"), 'w') as cfg_log_f:
         cfg_log_f.write(str(Namespace(**vars(args))))
 
-    print('args:',args)
 
 
     if not args.model_path.endswith(args.deform_type):
