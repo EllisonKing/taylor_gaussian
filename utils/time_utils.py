@@ -981,7 +981,6 @@ class ControlNodeWarp(nn.Module):
             if key in param_names:
                 node_param = state_dict[key]
                 if getattr(self, key).shape != node_param.shape:
-                    print(f'Loading nodes mismatching the original setting: {getattr(self, key).shape} and {node_param.shape}')
                     setattr(self, key, nn.Parameter(node_param))
                 else:
                     getattr(self, key).data = node_param
