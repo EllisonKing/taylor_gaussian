@@ -9,8 +9,6 @@
 # For inquiries contact  george.drettakis@inria.fr
 #
 ##################
-
-
 import resource
 
 # Set the maximum number of file descriptors to 4096.
@@ -20,7 +18,6 @@ resource.setrlimit(resource.RLIMIT_NOFILE, (4096, hard))
 # 
 new_soft, new_hard = resource.getrlimit(resource.RLIMIT_NOFILE)
 print(f"New soft limit: {new_soft}, New hard limit: {new_hard}")
-
 
 ############
 import os
@@ -49,14 +46,12 @@ from PIL import Image
 from train_gui_utils import DeformKeypoints
 from scipy.spatial.transform import Rotation as R
 
-
 try:
     from torch.utils.tensorboard import SummaryWriter
 
     TENSORBOARD_FOUND = True
 except ImportError:
     TENSORBOARD_FOUND = False
-
 
 def getProjectionMatrix(znear, zfar, fovX, fovY):
     tanHalfFovY = math.tan((fovY / 2))
@@ -93,7 +88,6 @@ def landmark_interpolate(landmarks, steps, step, interpolation='log'):
         else:
             print(f'Unknown interpolation type: {interpolation}')
             raise NotImplementedError
-
 
 def getWorld2View2(R, t, translate=np.array([.0, .0, .0]), scale=1.0):
     Rt = np.zeros((4, 4))
@@ -198,13 +192,10 @@ class GUI:
         self.tb_writer = prepare_output_and_logger(dataset)
         #self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, enable_densify_prune=self.opt.node_enable_densify_prune, is_scene_static=dataset.is_scene_static)
         flag=args.flag
+        #self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, enable_densify_prune=self.opt.node_enable_densify_prune, is_scene_static=dataset.is_scene_static)
         model_path = dataset.model_path
         if not control_node_growth(self.dataset, self.opt):
             pass
-
-
-
-        
         self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, 
                       pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, 
                       local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, 
@@ -238,11 +229,9 @@ class GUI:
                 print('Initialize nodes with Random point cloud.')
                 self.deform.deform.init(init_pcl=self.gaussians.get_xyz, force_init=True, opt=self.opt, as_gs_force_with_motion_mask=False, force_gs_keep_all=args.skinning)
 
-        
         bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
         self.background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
-        
         self.iter_start = torch.cuda.Event(enable_timing=True)
         self.iter_end = torch.cuda.Event(enable_timing=True)
         self.iteration = 1 if self.scene.loaded_iter is None else self.scene.loaded_iter
