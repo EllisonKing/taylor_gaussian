@@ -201,6 +201,10 @@ class GUI:
         model_path = dataset.model_path
         if not control_node_growth(self.dataset, self.opt):
             pass
+
+
+
+        
         self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, 
                       pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, 
                       local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, 
@@ -208,14 +212,15 @@ class GUI:
         
         deform_loaded = self.deform.load_weights(dataset.model_path, iteration=-1) # #
         # self.deform.deform.get_interpolate_point()
+        
         self.deform.train_setting(opt) #  # 
-
         gs_fea_dim = self.deform.deform.node_num if args.skinning and self.deform.name == 'node' else self.dataset.hyper_dim
         self.gaussians = GaussianModel_ST(dataset.sh_degree, fea_dim=gs_fea_dim, with_motion_mask=self.dataset.gs_with_motion_mask)
 
         print('args.dataset_type:',args.dataset_type)
         self.scene = Scene(dataset, self.gaussians, load_iteration=-1,loader=args.dataset_type if args.dataset_type is not None else "colmap")
         self.gaussians.training_setup(opt)
+        
         if self.deform.name == 'node' and not deform_loaded:
             if not self.dataset.is_blender:
                 if self.opt.random_init_deform_gs:
@@ -224,6 +229,7 @@ class GUI:
                     xyz = torch.rand((num_pts, 3)).float().cuda() * 2 - 1
                     mean, scale = self.gaussians.get_xyz.mean(dim=0), self.gaussians.get_xyz.std(dim=0).mean() * 3
                     xyz = xyz * scale + mean
+                    
                     self.deform.deform.init(init_pcl=xyz, force_init=True, opt=self.opt, as_gs_force_with_motion_mask=self.dataset.as_gs_force_with_motion_mask, force_gs_keep_all=True)
                 else:
                     print('Initialize nodes with COLMAP point cloud.')
@@ -232,9 +238,11 @@ class GUI:
                 print('Initialize nodes with Random point cloud.')
                 self.deform.deform.init(init_pcl=self.gaussians.get_xyz, force_init=True, opt=self.opt, as_gs_force_with_motion_mask=False, force_gs_keep_all=args.skinning)
 
+        
         bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
         self.background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
+        
         self.iter_start = torch.cuda.Event(enable_timing=True)
         self.iter_end = torch.cuda.Event(enable_timing=True)
         self.iteration = 1 if self.scene.loaded_iter is None else self.scene.loaded_iter
