@@ -1,12 +1,10 @@
 #
-# Copyright (C) 2023, Inria
-# GRAPHDECO research group, https://team.inria.fr/graphdeco
+# Copyright (C) 2025
 # All rights reserved.
 #
 # This software is free for non-commercial, research and evaluation use 
 # under the terms of the LICENSE.md file.
 #
-# For inquiries contact  george.drettakis@inria.fr
 #
 
 import torch
@@ -134,40 +132,6 @@ def get_staged_lr_func(lr_init, lr_final, warmup_steps=10000, max_steps=1000000)
             return lr_mid * ((lr_final / lr_mid) ** t)  # 指数衰减
     return staged_lr_schedule
 
-# def get_staged_trifunc_lr_func1(lr_init, lr_final, warmup_steps=10000, max_steps=1000000):
-#     # 定义分阶段学习率策略函数
-#     decay_start = warmup_steps * 0.1
-#     lr_mid = lr_init/5
-#     def cos_sin_lr_schedule(step): #, lr_init, lr_mid, lr_final, warmup_steps, decay_start, max_steps):
-#         if step < warmup_steps:
-#             # 阶段 1: 使用 sin 函数从 lr_init 平滑上升到 lr_mid
-#             return lr_init + (lr_mid - lr_init) * np.sin(0.5 * np.pi * step / warmup_steps)
-#         # elif step < decay_start:
-#         #     # 阶段 2: 保持较大的学习率 lr_mid
-#         #     return lr_mid
-#         else:
-#             # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
-#             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - decay_start) / (max_steps - decay_start)))
-#     return cos_sin_lr_schedule
-
-# # 定义分阶段学习率策略函数
-# def get_staged_trifunc_lr_func2(lr_init, lr_final, warmup_steps=25000, decay_start=140000, max_steps=1000000):
-#     lr_mid = lr_init  # 中间阶段的学习率
-#     decay_start = warmup_steps  # 阶段 3 的起始步数
-#     decay_steps =  warmup_steps -decay_start
-#     def cos_sin_lr_schedule(step):
-#         if step < decay_start:
-#             return lr_init / 10
-#         elif step < warmup_steps:
-#             # 阶段 1: 使用 sin 函数从 lr_init/5 平滑上升到 lr_mid
-#             return lr_init / 20 + (lr_mid - lr_init / 20) * np.sin(0.5 * np.pi * step / warmup_steps)
-#         # elif step < decay_start + decay_steps:
-#         #     # 阶段 2: 保持在 lr_mid
-#         #     return lr_mid
-#         else:
-#             # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
-#             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - decay_start - decay_steps) / (max_steps - decay_start - decay_steps)))
-#     return cos_sin_lr_schedule
 
 # # 定义分阶段学习率策略函数
 def get_staged_trifunc_lr_func3(lr_init, lr_final, warmup_steps=25000, decay_start=14000, max_steps=1000000):
@@ -184,7 +148,7 @@ def get_staged_trifunc_lr_func3(lr_init, lr_final, warmup_steps=25000, decay_sta
         #     # 阶段 2: 保持在 lr_mid
         #     return lr_mid
         else:
-            # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
+            # 阶段 3:从 lr_mid 平滑衰减到 lr_final
             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - decay_start - decay_steps) / (max_steps - decay_start - decay_steps)))
     return cos_sin_lr_schedule
 
@@ -203,28 +167,28 @@ def get_staged_trifunc_lr_func4(lr_init, lr_final, warmup_steps=25000, decay_ste
             # 阶段 2: 保持在 lr_mid
             return lr_mid
         else:
-            # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
+            # 阶段 3: 从 lr_mid 平滑衰减到 lr_final
             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - decay_start - decay_steps) / (max_steps - decay_start - decay_steps)))
     return cos_sin_lr_schedule
 
-# # 定义分阶段学习率策略函数
+# # 定义学习率策略函数
 def get_staged_trifunc_lr_func5(lr_init, lr_final, warmup_steps=25000, decay_steps=0, max_steps=1000000):
-    lr_mid = lr_init  # 中间阶段的学习率
-    decay_start = 5000  # 阶段 3 的起始步数
+    lr_mid = lr_init  # 学习率
+    decay_start = 5000  #起始步数
     # decay_steps =  warmup_steps -decay_start
     def cos_sin_lr_schedule(step):
         if step < decay_start:
             return lr_init / 10
         elif step < warmup_steps:
-            # 阶段 1: 使用 sin 函数从 lr_init/5 平滑上升到 lr_mid
+            # 阶段 1: 
             # return lr_init / 10 + (lr_mid - lr_init / 10) * np.sin(0.5 * np.pi * (step) / (warmup_steps))
            return lr_init / 10 + (lr_mid - lr_init / 10) * torch.sin(0.5 * torch.pi * step / warmup_steps)
 
         elif step < warmup_steps+decay_steps:
-            # 阶段 2: 保持在 lr_mid
+            # 阶段 2: 
             return lr_mid
         else:
-            # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
+            # 阶段 3: 
             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + torch.cos(torch.pi * (step - warmup_steps) / (max_steps - warmup_steps)))
             # return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - warmup_steps) / (max_steps - warmup_steps)))
     return cos_sin_lr_schedule
@@ -249,7 +213,6 @@ def get_staged_trifunc_lr_func6(lr_init, lr_final, warmup_steps=25000, decay_ste
             log_lerp = np.exp(np.log(lr_init/10) * (1 - t) + np.log(lr_final) * t)
             return delay_rate * log_lerp
 
-
         elif step < warmup_steps+decay_steps:
             # 阶段 2: 使用 sin 函数从 lr_init/20 平滑上升到 lr_mid
             return lr_init / 20 + (lr_mid - lr_init / 20) * np.sin(0.5 * np.pi * (step-warmup_steps) / (decay_steps))
@@ -259,21 +222,14 @@ def get_staged_trifunc_lr_func6(lr_init, lr_final, warmup_steps=25000, decay_ste
 
 def get_staged_trifunc_lr_func(lr_init, lr_final, warmup_steps=25000, decay_start=14000, max_steps=1000000):
     lr_mid = lr_init  # 中间阶段的学习率
-    # decay_start = warmup_steps  # 阶段 3 的起始步数
     decay_steps =  warmup_steps -decay_start
     def cos_sin_lr_schedule(step):
         if step < decay_start:
             return lr_init/10
-        # elif step < decay_start+5000:
-        #     return lr_init/10
+
         elif step < warmup_steps:
-            # 阶段 1: 使用 sin 函数从 lr_init/5 平滑上升到 lr_mid
             return lr_init / 10 + (lr_mid - lr_init / 10) * np.sin(0.5 * np.pi * (step-decay_start) / (warmup_steps-decay_start))
-        # elif step < decay_start + decay_steps:
-        #     # 阶段 2: 保持在 lr_mid
-        #     return lr_mid
         else:
-            # 阶段 3: 使用 cos 函数从 lr_mid 平滑衰减到 lr_final
             return lr_final + (lr_mid - lr_final) * 0.5 * (1 + np.cos(np.pi * (step - decay_start - decay_steps) / (max_steps - decay_start - decay_steps)))
     return cos_sin_lr_schedule
 
