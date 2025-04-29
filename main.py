@@ -9,15 +9,18 @@
 # For inquiries contact  george.drettakis@inria.fr
 #
 ##################
+
+
 import resource
 
-# 设置最大文件描述符数量为 4096
+# Set the maximum number of file descriptors to 4096.
 soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
 resource.setrlimit(resource.RLIMIT_NOFILE, (4096, hard))
 
-# 验证设置
+# 
 new_soft, new_hard = resource.getrlimit(resource.RLIMIT_NOFILE)
 print(f"New soft limit: {new_soft}, New hard limit: {new_hard}")
+
 
 ############
 import os
@@ -70,6 +73,7 @@ def getProjectionMatrix(znear, zfar, fovX, fovY):
     P[2, 3] = -(zfar * znear) / (zfar - znear)
     return P
 
+
 def landmark_interpolate(landmarks, steps, step, interpolation='log'):
     stage = (step >= np.array(steps)).sum()
     if stage == len(steps):
@@ -90,6 +94,7 @@ def landmark_interpolate(landmarks, steps, step, interpolation='log'):
             print(f'Unknown interpolation type: {interpolation}')
             raise NotImplementedError
 
+
 def getWorld2View2(R, t, translate=np.array([.0, .0, .0]), scale=1.0):
     Rt = np.zeros((4, 4))
     Rt[:3, :3] = R.transpose()
@@ -103,6 +108,7 @@ def getWorld2View2(R, t, translate=np.array([.0, .0, .0]), scale=1.0):
     Rt = np.linalg.inv(C2W)
     return np.float32(Rt)
 
+
 def get_node_increment(opt, dataset):
     """
     """
@@ -114,18 +120,15 @@ def get_node_increment(opt, dataset):
     }
     return increment_map[(opt.gt_alpha_mask_as_dynamic_mask, dataset.gs_with_motion_mask)]
 
-
 def should_update_node_num(current_node_num, threshold=1024):
     """
     """
     return current_node_num <= threshold
 
-
 def apply_node_increment(dataset, increment, max_node_num=8192):
     """
     """
     dataset.node_num = min(dataset.node_num + increment, max_node_num)
-
 
 def control_node_growth(dataset, opt, *, threshold=1024, max_node_num=4096):
     """
@@ -136,6 +139,7 @@ def control_node_growth(dataset, opt, *, threshold=1024, max_node_num=4096):
     increment = get_node_increment(opt, dataset)
     apply_node_increment(dataset, increment, max_node_num)
     return True
+
 
 class MiniCam:
     def __init__(self, c2w, width, height, fovy, fovx, znear, zfar, fid,timestamp):
@@ -158,6 +162,7 @@ class MiniCam:
         w2c[:3, 3] *= -1
 
         self.world_view_transform = torch.tensor(w2c).transpose(0, 1).cuda().float()
+        
         self.projection_matrix = (
             getProjectionMatrix(
                 znear=self.znear, zfar=self.zfar, fovX=self.FoVx, fovY=self.FoVy
@@ -172,7 +177,9 @@ class MiniCam:
         self.world_view_transform = torch.tensor(getWorld2View2(R, T)).transpose(0, 1).cuda()
         self.full_proj_transform = (
             self.world_view_transform.unsqueeze(0).bmm(self.projection_matrix.unsqueeze(0))).squeeze(0)
+        
         self.camera_center = self.world_view_transform.inverse()[3, :3]
+
 
 class GUI:
     def __init__(self, args, dataset, opt, pipe, testing_iterations, saving_iterations) -> None:
