@@ -233,6 +233,7 @@ def render_sets(dataset: ModelParams, iteration: int, pipeline: PipelineParams, 
             render_func(dataset.model_path, load2device_on_the_fly, "test", scene.loaded_iter, scene.getTestCameras(), gaussians, pipeline, background, deform)
 
 
+
 if __name__ == "__main__":
     # Set up command line argument parser
     parser = ArgumentParser(description="Testing script parameters")
@@ -262,23 +263,22 @@ if __name__ == "__main__":
     parser.add_argument("--deform-type", type=str, default='mlp')
     parser.add_argument("--dataset_type", type=str, default='technicolorvalid')
 
+    
     args = get_combined_args(parser)
     if not args.model_path.endswith(args.deform_type):
         args.model_path = os.path.join(os.path.dirname(os.path.normpath(args.model_path)), os.path.basename(os.path.normpath(args.model_path)) + f'_{args.deform_type}')
     print("Rendering " + args.model_path)
 
+    
     # Initialize system state (RNG)
     safe_state(args.quiet)
 
+    
     if args.dataset_type is None or args.dataset_type in ['colmap']:
         render = render_Smooth
         GaussianModel_ST = GaussianModelSmooth
     elif args.dataset_type == 'technicolor' or args.dataset_type =='technicolorvalid':
         render = render_Balance
         GaussianModel_ST = GaussianModelBalance
-
-    print('---import module---')
-    print(render.__name__)
-    print(GaussianModel_ST.__name__)
 
     render_sets(model.extract(args), args.iteration, pipeline.extract(args), args.skip_train, args.skip_test, args.mode, load2device_on_the_fly=args.load2gpu_on_the_fly)
