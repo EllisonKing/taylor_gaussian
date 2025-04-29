@@ -103,6 +103,39 @@ def getWorld2View2(R, t, translate=np.array([.0, .0, .0]), scale=1.0):
     Rt = np.linalg.inv(C2W)
     return np.float32(Rt)
 
+def get_node_increment(opt, dataset):
+    """
+    """
+    increment_map = {
+        (True, True): 1024 + 1024 * 2,
+        (True, False): 1024,
+        (False, True): 1024 * 2,
+        (False, False): 0
+    }
+    return increment_map[(opt.gt_alpha_mask_as_dynamic_mask, dataset.gs_with_motion_mask)]
+
+
+def should_update_node_num(current_node_num, threshold=1024):
+    """
+    """
+    return current_node_num <= threshold
+
+
+def apply_node_increment(dataset, increment, max_node_num=8192):
+    """
+    """
+    dataset.node_num = min(dataset.node_num + increment, max_node_num)
+
+
+def control_node_growth(dataset, opt, *, threshold=1024, max_node_num=4096):
+    """
+    """
+    if not should_update_node_num(dataset.node_num, threshold):
+        return False
+
+    increment = get_node_increment(opt, dataset)
+    apply_node_increment(dataset, increment, max_node_num)
+    return True
 
 class MiniCam:
     def __init__(self, c2w, width, height, fovy, fovx, znear, zfar, fid,timestamp):
@@ -159,7 +192,8 @@ class GUI:
         #self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, enable_densify_prune=self.opt.node_enable_densify_prune, is_scene_static=dataset.is_scene_static)
         flag=args.flag
         model_path = dataset.model_path
-        print('pkl_save_name,flag:',(model_path,flag))
+        if not control_node_growth(self.dataset, self.opt):
+            pass
         self.deform = DeformModel(K=self.dataset.K, deform_type=self.dataset.deform_type, is_blender=self.dataset.is_blender, skinning=self.args.skinning, hyper_dim=self.dataset.hyper_dim, node_num=self.dataset.node_num, 
                       pred_opacity=self.dataset.pred_opacity, pred_color=self.dataset.pred_color, use_hash=self.dataset.use_hash, hash_time=self.dataset.hash_time, d_rot_as_res=self.dataset.d_rot_as_res and not self.dataset.d_rot_as_rotmat, 
                       local_frame=self.dataset.local_frame, progressive_brand_time=self.dataset.progressive_brand_time, with_arap_loss=not self.opt.no_arap_loss, max_d_scale=self.dataset.max_d_scale, 
@@ -1305,17 +1339,20 @@ class GUI:
         d_opacity = d_opacity.detach() if d_opacity is not None else None
 
         # Render
+        # Determine whether to use a random background color
         random_bg_color = (self.opt.gt_alpha_mask_as_scene_mask or (self.opt.gt_alpha_mask_as_dynamic_mask and not self.deform.deform.as_gaussians.with_motion_mask)) and viewpoint_cam.gt_alpha_mask is not None
         render_pkg_re = render_ori(viewpoint_cam, self.deform.deform.as_gaussians, self.pipe, self.background, d_xyz, d_rot, d_scale, random_bg_color=random_bg_color, d_opacity=d_opacity, d_color=d_color, d_rot_as_res=self.deform.d_rot_as_res)
         image, viewspace_point_tensor, visibility_filter, radii = render_pkg_re["render"], render_pkg_re["viewspace_points"], render_pkg_re["visibility_filter"], render_pkg_re["radii"]
 
         # Loss
         gt_image = viewpoint_cam.original_image.cuda()
-        if random_bg_color:
+        if random_bg_color: # # If random background is enabled, composite the foreground onto the random background using the alpha mask.
             gt_alpha_mask = viewpoint_cam.gt_alpha_mask.cuda()
             gt_image = gt_image * gt_alpha_mask + render_pkg_re['bg_color'][:, None, None] * (1 - gt_alpha_mask)
         Ll1 = l1_loss(image, gt_image)
+        # # Compute the final image loss: a weighted combination of L1 and SSIM losses
         loss_img = (1.0 - self.opt.lambda_dssim) * Ll1 + self.opt.lambda_dssim * (1.0 - ssim(image, gt_image))
+        # # The total loss is the image reconstruction loss (other loss terms can be added on top of this)
         loss = loss_img
 
         if self.iteration_node_rendering > self.opt.node_warm_up:
@@ -1893,16 +1930,16 @@ def add_args_to_config(config=None, lp=None, op=None, pp=None,cfg=None):
     config.OptimizationParams.update(vars(op))
     config.PipelineParams.update(vars(pp))
 
-    # 合并配置，第二个配置中的值替换第一个配置中的相应值
+    # Merge configurations, with values from the second configuration overriding corresponding values in the first.
     updated_params = {}
     for key in cfg.keys():
-        if key in config:  # 如果第一个配置中有该键，则用第二个配置的值替换
+        if key in config:  # If the key exists in the first configuration, replace its value with the value from the second configuration.
             config[key].update(cfg[key])
         else:
-            config[key] = cfg[key]  # 如果第一个配置中没有该键，则添加
+            config[key] = cfg[key]  # If the key does not exist in the first configuration, add it from the second configuration.
         updated_params[key] = cfg[key]
 
-    # 将更新的参数存储在 config 中
+    # Store the updated parameters in the `config`.
     config.updated_params = updated_params
     return config
 
@@ -1943,14 +1980,10 @@ if __name__ == "__main__":
     import os.path as osp
     if not os.path.exists(args.model_path+'_node'):
         os.makedirs(args.model_path+'_node', exist_ok=True)
-    # config.dump(osp.join(args.model_path+'_node', osp.basename(args.config.split('/')[-1])))
 
     args = read_config_params(args, cfg)
-
     with open(os.path.join(args.model_path+'_node', "args.py"), 'w') as cfg_log_f:
         cfg_log_f.write(str(Namespace(**vars(args))))
-
-
 
     if not args.model_path.endswith(args.deform_type):
         args.model_path = os.path.join(os.path.dirname(os.path.normpath(args.model_path)), os.path.basename(os.path.normpath(args.model_path)) + f'_{args.deform_type}')
@@ -1963,11 +1996,6 @@ if __name__ == "__main__":
     elif args.dataset_type == 'technicolor':
         render = render_Balance
         GaussianModel_ST = GaussianModelBalance
-
-    print('---import module---')
-    print(render.__name__)
-    print(GaussianModel_ST.__name__)
-
 
     torch.autograd.set_detect_anomaly(args.detect_anomaly)
     gui = GUI(args=args, dataset=lp.extract(args), opt=op.extract(args), pipe=pp.extract(args),testing_iterations=args.test_iterations, saving_iterations=args.save_iterations)
