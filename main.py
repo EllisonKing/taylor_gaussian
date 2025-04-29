@@ -1129,10 +1129,15 @@ class GUI:
                 self.deform.deform.init(self.opt, self.gaussians.get_xyz.detach(), feature=self.gaussians.feature)
             time_input = self.deform.deform.expand_time(fid)
             N = time_input.shape[0]
+            # Use the `deform.step()` method to compute the deformation parameters (position, rotation, scaling, opacity, color) for the current iteration.
+            # These values are provided by the Gaussian field (gaussians) and are deformed based on the time input and other features.
             ast_noise = 0 if self.dataset.is_blender else torch.randn(1, 1, device='cuda').expand(N, -1) * time_interval * self.smooth_term(self.iteration)
             d_values = self.deform.step(self.gaussians.get_xyz.detach(), time_input + ast_noise, iteration=self.iteration, feature=self.gaussians.feature, motion_mask=self.gaussians.motion_mask, camera_center=viewpoint_cam.camera_center, time_interval=time_interval)
-            d_xyz, d_rotation, d_scaling, d_opacity, d_color = d_values['d_xyz'], d_values['d_rotation'], d_values['d_scaling'], d_values['d_opacity'], d_values['d_color']
+            d_xyz, d_rotation, d_scaling, d_opacity, d_color = d_values['d_xyz'], d_values['d_rotation'], d_values['d_scaling'], d_values['d_opacity'], d_values['d_color'] # Unpack the deformation parameters from the returned dictionary: position (d_xyz), rotation (d_rotation), scaling (d_scaling), opacity (d_opacity), and color (d_color).
+            # If the current iteration is less than the warm-up period, freeze these deformation parameters to prevent their gradients from being updated (detach).
+            # This ensures that the model is not influenced by the gradients of these deformation parameters during the early stages of training.
             if self.iteration < self.opt.warm_up:
+                # This ensures that the model is not influenced by the gradients of these deformation parameters during the early stages of training.
                 d_xyz, d_rotation, d_scaling, d_opacity, d_color = d_xyz.detach(), d_rotation.detach(), d_scaling.detach(), d_opacity.detach() if d_opacity is not None else None, d_color.detach() if d_color is not None else None
             elif self.iteration < self.opt.dynamic_color_warm_up:
                 d_color = d_color.detach() if d_color is not None else None
