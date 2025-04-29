@@ -32,6 +32,7 @@ run_pipeline() {
     --is_blender \
     --eval \
     --gt_alpha_mask_as_scene_mask \
+    --skip_train \
     --local_frame \
     --resolution 2 \
     --W 800 \
