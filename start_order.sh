@@ -30,6 +30,7 @@ run_pipeline() {
     --gt_alpha_mask_as_dynamic_mask \
     --gs_with_motion_mask \
     --eval \
+    --skip_train \
     --local_frame \
     --resolution 2 \
     --W 800 \
