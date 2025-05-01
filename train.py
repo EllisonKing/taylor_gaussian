@@ -116,7 +116,20 @@ def training_report(tb_writer, iteration, Ll1, loss, l1_loss, elapsed, testing_i
                         tb_writer.add_images(config['name'] + "_view_{}/render".format(viewpoint.image_name), image[None], global_step=iteration)
                         if iteration == testing_iterations[0]:
                             tb_writer.add_images(config['name'] + "_view_{}/ground_truth".format(viewpoint.image_name), gt_image[None], global_step=iteration)
-
+    # # add
+    # full_dict = {}
+    # full_dict[model_path] = {}
+    # full_dict[model_path][iteration] = {}
+    # full_dict[model_path][iteration].update({"SSIM": torch.tensor(ssim_test).item(),
+    #                                          "PSNR": torch.tensor(psnr_test).item(),
+    #                                          "LPIPSalex": torch.tensor(alex_lpips_test).item(),
+    #                                          "ms_ssim_test": torch.tensor(ms_ssim_test).item(),
+    #                                          "LPIPSVGG": torch.tensor(lpips_test).item()  # ,
+    #                                          # "times": torch.tensor(times).mean().item()
+    #                                          })
+    # import json
+    # with open(model_path + "/" + str(name) + str('_') + str(iteration) + "_runtimeresults.json", 'w') as fp:
+    #     json.dump(full_dict, fp, indent=True)
                 l1_test = torch.stack(l1_list).mean()
                 psnr_test = torch.stack(psnr_list).mean()
                 ssim_test = torch.stack(ssim_list).mean()
