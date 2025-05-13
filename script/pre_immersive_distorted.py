@@ -47,7 +47,7 @@ from thirdparty.gaussian_splatting.utils.my_utils import posetow2c_matrcs, rotma
 from thirdparty.gaussian_splatting.utils.graphics_utils import focal2fov, fov2focal
 from thirdparty.colmap.pre_colmap import *
 from thirdparty.gaussian_splatting.helper3dg import getcolmapsingleimdistort 
-from script.pre_n3d import extractframes
+from script.n3d_process import extractframes
 from script.utils_pre import write_colmap
 
 SCALEDICT = {}
