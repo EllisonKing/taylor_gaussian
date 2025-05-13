@@ -1,6 +1,6 @@
 conda deactivate
-conda create -n colmapenv python=3.8
-conda activate colmapenv
+conda create -n colmap python=3.8
+conda activate colmap
 pip install opencv-python-headless
 pip install tqdm
 pip install natsort
