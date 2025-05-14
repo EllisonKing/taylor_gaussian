@@ -1040,7 +1040,7 @@ class ControlNodeWarp(nn.Module):
             # self.gs_label = 1
             self.ks = None
         else:
-            print('--------used farthest_point_sample for controlnode sampling---------')
+            #print('--------used farthest_point_sample for controlnode sampling---------')
             #pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
             #init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
             #self.nodes.data = nn.Parameter(torch.cat([init_pcl[init_nodes_idx].float(), 1e-2 * torch.ones([self.node_num, self.hyper_dim]).float().cuda()], dim=-1))
@@ -1071,7 +1071,7 @@ class ControlNodeWarp(nn.Module):
                 #del tensor_to_save
 
             elif self.flag == 1:
-                print('flag__:', self.flag)
+                #print('flag__:', self.flag)
 
                 pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
                 init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
@@ -1080,7 +1080,7 @@ class ControlNodeWarp(nn.Module):
                     dim=-1))
                     
             else:
-                print('flag_else:', self.flag)
+                #print('flag_else:', self.flag)
                 name=self.model_path.split('/')[-1]
                 with open( './index_path/'+ str(name)+'_index.pkl', 'rb') as f:
                     loaded_array = pickle.load(f)
