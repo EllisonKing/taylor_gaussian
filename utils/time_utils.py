@@ -14,6 +14,7 @@ except:
     svd = torch.svd
     print('Use original torch svd!')
 
+
 def log1p_safe(x):
   """The same as torch.log1p(x), but clamps the input to prevent NaNs."""
   x = torch.as_tensor(x)
@@ -859,37 +860,6 @@ class keman_select(nn.Module):
 
         return closest_points_indices
 
-    # def forward(self, xyz,num_clusters,k=1):
-    #     #设定聚类的数量
-    #     # num_clusters = num_clusters  # 根据需求设置
-    #
-    #     # 使用 K-means 聚类
-    #     xyz_np = xyz.cpu().detach().numpy()  # 转换为 numpy 数组
-    #     kmeans = KMeans(n_clusters=num_clusters, n_init=num_clusters, max_iter=3)
-    #     xyz.device
-    #     kmeans.fit(xyz_np)
-    #
-    #     # 获取聚类中心
-    #     cluster_centers = torch.tensor(kmeans.cluster_centers_, device=xyz.device)
-    #
-    #     # 获取聚类标签
-    #     labels = torch.tensor(kmeans.labels_, device=xyz.device)
-    #
-    #
-    #     selected_indices = []
-    #     # 从每个聚类中选择最近的 k 个点的索引
-    #     for i in range(num_clusters):
-    #         cluster_points = xyz[labels == i]
-    #         if cluster_points.numel() > 0:
-    #             distances = torch.cdist(cluster_points.unsqueeze(0), cluster_points.unsqueeze(0)).squeeze(0)
-    #             nearest_indices = distances.topk(1, largest=False)[k+1][:, 1:]  # 排除自身
-    #             selected_indices.extend(cluster_points[nearest_indices].tolist())  # 选择的点索引
-    #
-    #     # 输出选中的索引
-    #     selected_indices_tensor = torch.tensor(selected_indices, device=xyz.device)
-    #     return torch.flatten(selected_indices_tensor, start_dim=0, end_dim=1) #selected_indices_tensor.long()
-
-
 class ControlNodeWarp(nn.Module):
     def __init__(self, is_blender, init_pcl=None, node_num=512, K=3, use_hash=False, hash_time=False, enable_densify_prune=False, pred_opacity=False, pred_color=False, with_arap_loss=False, with_node_weight=True, local_frame=False, d_rot_as_res=True, skinning=False, hyper_dim=2, progressive_brand_time=False, max_d_scale=-1, is_scene_static=False, flag_=0,model_path=None,**kwargs):
         super().__init__()
@@ -912,7 +882,6 @@ class ControlNodeWarp(nn.Module):
         self.flag= flag_
         self.model_path=model_path
 
-        # # 聚类算法选择控制点：
         # self.ks = keman_select()
         
         self.skinning = skinning  # As skin model, discarding KNN weighting
@@ -948,6 +917,7 @@ class ControlNodeWarp(nn.Module):
         self.cached_nn_weight = False
         self.nn_weight, self.nn_dist, self.nn_idxs = None, None, None
 
+    
     # def get_interpolate_point(self):
     #     self.newxyz, self.newcolor, self.newnormal, self.newtime = interpolate_point(self.nodes[..., :])
 
@@ -1032,7 +1002,7 @@ class ControlNodeWarp(nn.Module):
             init_nodes_idx = None
             print('Initialization with all pcl. Need to reset the optimizer.')
         elif self.ks is not None:
-            print('--------used kmeans for controlnode sampling---------')
+            
             init_nodes_idx = self.ks(init_pcl,self.node_num)
             self.nodes.data = nn.Parameter(torch.cat(
                 [init_pcl[init_nodes_idx].float(), 1e-2 * torch.ones([self.node_num, self.hyper_dim]).float().cuda()],
@@ -1040,7 +1010,6 @@ class ControlNodeWarp(nn.Module):
             # self.gs_label = 1
             self.ks = None
         else:
-            #print('--------used farthest_point_sample for controlnode sampling---------')
             #pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
             #init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
             #self.nodes.data = nn.Parameter(torch.cat([init_pcl[init_nodes_idx].float(), 1e-2 * torch.ones([self.node_num, self.hyper_dim]).float().cuda()], dim=-1))
