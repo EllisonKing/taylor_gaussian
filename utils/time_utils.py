@@ -1014,13 +1014,9 @@ class ControlNodeWarp(nn.Module):
             #init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
             #self.nodes.data = nn.Parameter(torch.cat([init_pcl[init_nodes_idx].float(), 1e-2 * torch.ones([self.node_num, self.hyper_dim]).float().cuda()], dim=-1))
 
-            #print('self.nodes.data:',self.nodes.data)
-            #print('init_nodes_idx:',len(init_nodes_idx))
-            #print('self.nodes.data:',self.nodes.data.size())
             import pickle
             import time
             if self.flag ==0:
-                #print('flag:',self.flag)
                 pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
                 init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
                 self.nodes.data = nn.Parameter(torch.cat(
@@ -1033,14 +1029,11 @@ class ControlNodeWarp(nn.Module):
                     
                 with open(self.model_path +'_index.pkl', 'wb') as f:
                     pickle.dump(init_nodes_idx, f)
-                #print('init_nodes_idx:',len(init_nodes_idx))
-                #print('init_nodes_idx:',type(init_nodes_idx))
 
                 self.flag+=1
                 #del tensor_to_save
 
             elif self.flag == 1:
-                #print('flag__:', self.flag)
 
                 pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
                 init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
@@ -1049,7 +1042,6 @@ class ControlNodeWarp(nn.Module):
                     dim=-1))
                     
             else:
-                #print('flag_else:', self.flag)
                 name=self.model_path.split('/')[-1]
                 with open( './index_path/'+ str(name)+'_index.pkl', 'rb') as f:
                     loaded_array = pickle.load(f)
