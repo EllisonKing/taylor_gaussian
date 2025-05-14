@@ -1118,7 +1118,6 @@ class ControlNodeWarp(nn.Module):
         else:
             self.init_gaussians(init_pcl=self.nodes[..., :3],with_motion_mask=as_gs_force_with_motion_mask)
         self.as_gaussians.training_setup(opt)
-        print(f'Control node initialized with {self.nodes.shape[0]} from {init_pcl.shape[0]} points.')
         return init_nodes_idx
 
     def expand_time(self, t):
