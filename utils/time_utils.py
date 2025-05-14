@@ -85,7 +85,6 @@ def robust_lossfunc(squared_x, alpha, scale):
     loss_otherwise = (beta_safe / alpha_safe) * (
             torch.pow(squared_scaled_x / beta_safe + 1., 0.5 * alpha) - 1.)
 
-    # Select which of the cases of the loss to return.
     loss = torch.where(
             alpha == -float('inf'), loss_neginf,
             torch.where(
@@ -286,6 +285,7 @@ class ProgressiveBandFrequency(nn.Module):
             self.cur_step.data = torch.ones_like(self.cur_step) * global_step
 
 
+
 class StaticNetwork(nn.Module):
     def __init__(self, return_tensors=False, *args, **kwargs) -> None:
         super().__init__()
@@ -306,6 +306,7 @@ class StaticNetwork(nn.Module):
     
     def update(self, *args, **kwargs):
         return
+
 
 
 class DeformNetwork(nn.Module):
