@@ -1051,7 +1051,7 @@ class ControlNodeWarp(nn.Module):
             import pickle
             import time
             if self.flag ==0:
-                print('flag:',self.flag)
+                #print('flag:',self.flag)
                 pcl_to_samp = init_pcl if hyper_pcl is None else hyper_pcl
                 init_nodes_idx = farthest_point_sample(pcl_to_samp.detach()[None], self.node_num)[0]
                 self.nodes.data = nn.Parameter(torch.cat(
@@ -1064,8 +1064,8 @@ class ControlNodeWarp(nn.Module):
                     
                 with open(self.model_path +'_index.pkl', 'wb') as f:
                     pickle.dump(init_nodes_idx, f)
-                print('init_nodes_idx:',len(init_nodes_idx))
-                print('init_nodes_idx:',type(init_nodes_idx))
+                #print('init_nodes_idx:',len(init_nodes_idx))
+                #print('init_nodes_idx:',type(init_nodes_idx))
 
                 self.flag+=1
                 #del tensor_to_save
