@@ -616,7 +616,7 @@ class GaussianModelBase:
     #     # print('self._features_t:', self._features_t.size())
     #     # print('deltat:',deltat.size())
     #     return torch.cat((self.get_features, (deltat.unsqueeze(1) * self._features_t)), dim=1) # add deltat
-    #     # return torch.cat((self._features_dc, deltat * self._features_t), dim=1)  # add deltat
+
 
     @property
     def get_opacity(self):
