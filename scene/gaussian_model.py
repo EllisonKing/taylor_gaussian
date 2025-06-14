@@ -611,13 +611,6 @@ class GaussianModelBase:
         features_rest = self._features_rest
         return torch.cat((features_dc, features_rest), dim=1)
 
-    # def get_features_deltat(self, deltat=None): # 获取特征，包括颜色和时间信息
-    #     # print('self.get_features:', self.get_features.size())
-    #     # print('self._features_t:', self._features_t.size())
-    #     # print('deltat:',deltat.size())
-    #     return torch.cat((self.get_features, (deltat.unsqueeze(1) * self._features_t)), dim=1) # add deltat
-
-
     @property
     def get_opacity(self):
         return self.opacity_activation(self._opacity)
