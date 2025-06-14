@@ -680,7 +680,7 @@ class GaussianModelBase:
         f_n_rotation = torch.zeros((fused_point_cloud.shape[0], 4), device="cuda")
         self._f_n_rotation = nn.Parameter(f_n_rotation.requires_grad_(True))
 
-        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")  # x1, x2, x3,  y1,y2,y3, z1,z2,z3 #add
+        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")
         self._f_n_motion = nn.Parameter(f_n_motion.requires_grad_(True))
 
         ## sacle param
@@ -1236,7 +1236,7 @@ class GaussianModelSmooth(GaussianModelBase):
         f_n_rotation = torch.zeros((fused_point_cloud.shape[0], 4), device="cuda")
         self._f_n_rotation = nn.Parameter(f_n_rotation.requires_grad_(True))
 
-        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")  # x1, x2, x3,  y1,y2,y3, z1,z2,z3 #add
+        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")
         self._f_n_motion = nn.Parameter(f_n_motion.requires_grad_(True))
 
         ## sacle para
@@ -1386,7 +1386,7 @@ class GaussianModelBalance(GaussianModelBase):
         f_n_rotation = torch.zeros((fused_point_cloud.shape[0], 4), device="cuda")
         self._f_n_rotation = nn.Parameter(f_n_rotation.requires_grad_(True))
 
-        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")  # x1, x2, x3,  y1,y2,y3, z1,z2,z3 #add
+        f_n_motion = torch.zeros((fused_point_cloud.shape[0], 9), device="cuda")
         self._f_n_motion = nn.Parameter(f_n_motion.requires_grad_(True))
 
         ## sacle para
