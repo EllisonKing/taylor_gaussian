@@ -338,11 +338,12 @@ This work incorporates many open-source codes. We extend our gratitude to the au
 If you find this code/work useful for your own research, please consider citing:
 
 ```
-@article{hu2024learnable,
+@inproceedings{hu2025learnable,
   title={Learnable Infinite Taylor Gaussian for Dynamic View Rendering},
   author={Hu, Bingbing and Li, Yanyan and Xie, Rui and Xu, Bo and Dong, Haoye and Yao, Junfeng and Lee, Gim Hee},
-  journal={arXiv preprint arXiv:2412.04282},
-  year={2024}
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={26844--26854},
+  year={2025}
 }
 ```
 
